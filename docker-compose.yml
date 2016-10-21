@@ -8,12 +8,15 @@ mariadb:
         - MYSQL_PASSWORD=azkaban
         - MYSQL_DATABASE=azkaban
         - MYSQL_ROOT_PASSWORD=wootwoot
+        - TZ=Asia/Shanghai
 
 executor:
     image: puckel/azkaban-executor
     restart: always
     links:
         - mariadb
+    environment:
+        - TZ=Asia/Shanghai
 
 webserver:
     image: puckel/azkaban-webserver
@@ -23,3 +26,5 @@ webserver:
     links:
         - executor:azkaban-executor
         - mariadb
+    environment:
+        - TZ=Asia/Shanghai
